@@ -1,7 +1,16 @@
 <template>
-  <router-view/>
+  <header-file></header-file>
+  <div class="container">
+    <router-view/>
+  </div>
+  
 </template>
 
-<style>
-
-</style>
+<script>
+import HeaderFile from "@/components/HeaderFile.vue"
+export default {
+  components:{
+    HeaderFile
+  } 
+}
+</script>
