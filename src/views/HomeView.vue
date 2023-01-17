@@ -1,6 +1,7 @@
 <template>
     <main v-if="!loading">
-       this is the data
+       <data-title :text="title" :dataDate="dataDate"></data-title>
+       <data-boxes :stats="stats"></data-boxes>
     </main>
     <main v-else class="flex flex-col align-center justify-center text-center " >
       <div class="text-gray-500 text-3xl mt-10 mb-6">
@@ -11,8 +12,13 @@
 </template>
 
 <script>
+import DataTitle from '@/components/DataTitle.vue'
+import DataBoxes from '@/components/DataBoxes.vue'
   export default {
-    components:{},
+    components:{
+      DataTitle,
+      DataBoxes
+    },
     data() {
       return {
         loading:true,
@@ -28,12 +34,13 @@
       async fetchCovidData(){
         const response = await fetch('https://api.covid19api.com/summary')
         const data = await response.json()
-       
+       console.log(data)
         return data
       }
     },
     async created(){
       const data  = await this.fetchCovidData() 
+      console.log(data)
       this.dataDate = data.Date
       this.stats = data.Global
       this.countries = data.Countries
